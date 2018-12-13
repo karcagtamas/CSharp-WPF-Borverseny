@@ -202,7 +202,7 @@ namespace _2018_11_27_Borverseny.Data
             using (MySqlConnection con = new MySqlConnection(conStr))
             {
                 con.Open();
-                string sql = "UPDATE Borasz SET BoraszId = @BoraszId, Borvidek = @Borvidek, Evjarat = @Evjarat, KategoriaId = @KategoriaId, Helyezes = @Helyezes, FantaziaNev = @FantaziaNev WHERE Id = @Id;";
+                string sql = "UPDATE nevezes SET BoraszId = @BoraszId, Borvidek = @Borvidek, Evjarat = @Evjarat, KategoriaId = @KategoriaId, Helyezes = @Helyezes, FantaziaNev = @FantaziaNev WHERE Id = @Id;";
                 using (MySqlCommand cmd = new MySqlCommand(sql, con))
                 {
                     cmd.Parameters.AddWithValue("@BoraszId", model.BoraszId);

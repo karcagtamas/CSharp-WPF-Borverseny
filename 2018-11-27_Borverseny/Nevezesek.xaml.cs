@@ -55,5 +55,45 @@ namespace _2018_11_27_Borverseny
                 dgLista.Items.Refresh();
             }
         }
+
+        private void btnModosit_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgLista.SelectedItem != null)
+            {
+                Nevezes elem = (Nevezes)dgLista.SelectedItem;
+                List<Nevezes> lista = (List<Nevezes>)dgLista.ItemsSource;
+                int index = lista.IndexOf(elem);
+
+                elem = new Adateleres().GetNevezes(elem.Id);
+                var ablak = new NevezesReszletek(elem);
+                if (ablak.ShowDialog() == true)
+                {
+                    lista[index] = ablak.Nevezes;
+                    dgLista.Items.Refresh();
+                }
+            }
+        }
+
+        private void btnTorol_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgLista.SelectedItem != null)
+            {
+                if (MessageBox.Show("Biztosan törölni szeretné?", "Megerősítése", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+                    Nevezes elem = (Nevezes)dgLista.SelectedItem;
+                    List<Nevezes> lista = (List<Nevezes>)dgLista.ItemsSource;
+                    try
+                    {
+                        new Adateleres().DeleteNevezes(elem);
+                        lista.Remove(elem);
+                        dgLista.Items.Refresh();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+            }
+        }
     }
 }
